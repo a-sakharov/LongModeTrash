@@ -26,7 +26,7 @@ start:
     ; AL = number of sectors transferred (only valid if CF set for some BIOSes)
     
     MOV AX, 0x0214 ; just read 20 sectors (10kb) for now, later maybe fix this
-    MOV CX, 1
+    MOV CX, 2
     MOV DH, 0
     PUSH WORD 0
     POP ES
