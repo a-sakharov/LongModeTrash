@@ -9,7 +9,6 @@ start:
     MOV SI, enter_pm_str
     CALL printString
     
-    CLI ;who knows...
     LGDT [gdt_load]
     
     ;save cursor position
@@ -19,6 +18,12 @@ start:
     
     PUSH DX
     
+    ; inform bios that we are entering protected mode
+    MOV AX, 0xEC00
+    MOV BL, 1
+    INT 0x15
+    
+    CLI ;who knows...
     SMSW AX 
     OR AX, 1 ; PE=1
     LMSW AX
