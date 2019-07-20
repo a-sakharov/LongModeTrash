@@ -12,6 +12,13 @@ start:
     CLI ;who knows...
     LGDT [gdt_load]
     
+    ;save cursor position
+    MOV AH, 0x03
+    XOR BH, BH
+    INT 0x10
+    
+    PUSH DX
+    
     SMSW AX 
     OR AX, 1 ; PE=1
     LMSW AX

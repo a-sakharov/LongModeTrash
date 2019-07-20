@@ -3,6 +3,10 @@ use16
 org 0x7C00
 ;;;
 start:
+    ;setup video mode
+    MOV AX, 0x0003
+    INT 0x10
+
     MOV SI, hello_str
     CALL printString
     
