@@ -10,17 +10,7 @@ start:
     CALL printString
     
     CLI ;who knows...
-    ;PUSH WORD gdt
     LGDT [gdt_load]
-    ;POP AX
-    
-    ;init all segment regs except CS. CS should be.
-    MOV AX, 0x10
-    MOV DS, AX
-    MOV ES, AX
-    MOV FS, AX
-    MOV GS, AX
-    MOV SS, AX
     
     SMSW AX 
     OR AX, 1 ; PE=1
@@ -102,7 +92,7 @@ gdt_pntr: DD gdt
 ;   AVL = 0 (who cares?)
 ;   P = 1 (segment present in memory)
 ;   DPL = 0 (ring 0, ho-ho)
-;   S = 0 (data/code segment, not a system segment)
+;   S = 1 (data/code segment, not a system segment)
 ;   Type = 0010 for data (R+W) and 1010 for code (R+E)
 
 times 0x100-($-$$) DB 0
