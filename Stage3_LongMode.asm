@@ -3,21 +3,21 @@ use64
 org 0x0C00
 ;;
 start:
-    MOV AX, 0x10
-    MOV DS, AX
-    MOV ES, AX
-    MOV FS, AX
-    MOV GS, AX
-    MOV SS, AX
-    
-    MOV RAX, QWORD [0x1F0000]
-    
     POP DX
     MOV byte [cur_row], DL
     
     MOV RSI, hello_msg
     CALL printLine
     
+    ;i dont care at all
+    CLD
+    MOV RCX, 0xC00 / 8
+    MOV RSI, 0xD00
+    MOV RDI, 0xB8000 + (80 * 2 * 8)
+.next_screen_item:
+    LODSQ
+    STOSQ
+    LOOP .next_screen_item
     JMP $
 
 printLine:

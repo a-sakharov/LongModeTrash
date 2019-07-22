@@ -29,7 +29,7 @@ start:
     ; AH = status
     ; AL = number of sectors transferred (only valid if CF set for some BIOSes)
     
-    MOV AX, 0x0203 ; just read 3 sectors (1kb) for now, later maybe fix this
+    MOV AX, 0x0208 ; just read 8 sectors (1kb) for now, later maybe fix this
     MOV CX, 2
     MOV DH, 0
     PUSH WORD 0
@@ -107,7 +107,7 @@ DB 0x55,0xAA
 ; 0x00900-0x00A00 - stage 1 (real mode to protected mode and GDT)
 ; 0x00A00-0x00C00 - stage 2 (protected mode to long mode and GDT+L)
 ; 0x00C00-0x00D00 - stage 3 (long mode)
-; 0x00D00-0x00F00 - stage 3 data (image)
-; 0x00F00-0x02000 - reserved for future bootloader development
+; 0x00D00-0x01900 - stage 3 data (image)
+; 0x01900-0x02000 - reserved for future bootloader development
 ; 0x02000-0x06000 - PML4E + PDPTE + PDE + PTE, ho-ho
 ; 0x06000-0x16000 - reserved for kernel and kernel data (64k should be enought i hope)
