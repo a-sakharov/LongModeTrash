@@ -30,7 +30,13 @@
     @exit
 )
 
-copy /B /Y bootFullDisk.bin+Stage1_RealMode.bin+Stage2_ProtectedMode.bin+Stage3_LongMode.bin disk.bin
+%FASM% Stage3_data.asm
+@if not %ERRORLEVEL% == 0 (
+    @pause
+    @exit
+)
+
+copy /B /Y bootFullDisk.bin+Stage1_RealMode.bin+Stage2_ProtectedMode.bin+Stage3_LongMode.bin+Stage3_data.bin disk.bin
 @if not %ERRORLEVEL% == 0 (
     @pause
     @exit
